@@ -51,3 +51,52 @@ on the `<img>` path. Matches the checklist bullet's wording closely.
   UX baseline" section beyond `loading="lazy"` — worth revisiting once
   a real username is live to confirm perceived load behavior.
 
+## Iteration 2 — LeetCode stats graph component
+
+**Checklist item:** "LeetCode stats graph component built and wired to
+a config placeholder the same way — renders correctly with the
+placeholder, ready to go live the moment a real username is dropped
+in."
+
+**What changed:**
+- Added `src/components/LeetcodeGraph.astro`, mirroring the GitHub
+  graph component's pattern: when `siteConfig.leetcodeUsername` is
+  still the `YOUR_LEETCODE_USERNAME` placeholder, renders a styled
+  placeholder — a row of 5 stat tiles (Solved / Easy / Medium / Hard /
+  Ranking, each showing "—") plus a caption pointing at
+  `site.config.ts` — instead of a blank space or broken image. Once a
+  real username is set, it renders a live `leetcard.jacoblin.cool` SVG
+  stats card (lazy-loaded `<img>`), with an `onerror` fallback to text.
+- Wired it into the existing "GitHub Activity" section on the homepage
+  as a second "LeetCode Stats" subsection (reused the section rather
+  than adding a new one, since both are the same kind of "coding
+  activity" content and the checklist doesn't require separate
+  sections).
+- No changes to `site.config.ts` were needed — `leetcodeUsername` was
+  already defined there from iteration 1.
+
+**Verified:** Dev server was already running on port 4321. Loaded the
+page with Playwright, screenshotted the `#activity` section (now
+containing both graphs), and confirmed zero console errors. Screenshot
+shows both the GitHub placeholder grid and the new LeetCode stat-tile
+placeholder rendering cleanly, matching the site's newspaper aesthetic.
+
+**Self-grade: Done.** The component exists, imports the username from
+the shared config (never hardcoded), renders a clean intentional
+placeholder state with no console error or broken image, and needs no
+code change once a real LeetCode username is dropped into
+`site.config.ts` — only the `leetcard.jacoblin.cool` URL will start
+resolving to real data.
+
+**Follow-up needed:**
+- Both graph components currently rely on third-party image services
+  (`ghchart.rshah.org`, `leetcard.jacoblin.cool`) rather than a
+  self-hosted fetch — worth flagging to the user as an external
+  dependency risk, though it's the standard pattern for this and keeps
+  the site static/serverless.
+- `resume.pdf` is still missing from `public/` (carried over from
+  iteration 1).
+- All remaining checklist items (Blog preview date/link, Education
+  on About page, Contact block placement, Footer, all psychological
+  principles, and technical/UX baseline items) are still unchecked.
+

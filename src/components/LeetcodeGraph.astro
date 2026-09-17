@@ -1,0 +1,48 @@
+---
+import { siteConfig, isPlaceholder } from "../config/site.config";
+
+const showPlaceholder = isPlaceholder(siteConfig.leetcodeUsername);
+const cardUrl = `https://leetcard.jacoblin.cool/${siteConfig.leetcodeUsername}?theme=light&font=monospace&ext=heatmap`;
+
+const placeholderStats = [
+  { label: "Solved", value: "—" },
+  { label: "Easy", value: "—" },
+  { label: "Medium", value: "—" },
+  { label: "Hard", value: "—" },
+  { label: "Ranking", value: "—" },
+];
+---
+
+<div class="border-2 border-black p-6" data-leetcode-graph>
+  {showPlaceholder ? (
+    <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-2 gap-1 sm:grid-cols-5">
+        {placeholderStats.map((stat) => (
+          <div class="border border-black px-4 py-3 text-center">
+            <p class="font-headline text-2xl leading-none">{stat.value}</p>
+            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-wide text-black/60">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+      <p class="font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+        LeetCode stats will appear here — add a LeetCode username in{" "}
+        <code class="font-mono">site.config.ts</code> to go live.
+      </p>
+    </div>
+  ) : (
+    <>
+      <img
+        src={cardUrl}
+        alt={`${siteConfig.leetcodeUsername}'s LeetCode stats`}
+        loading="lazy"
+        class="w-full"
+        onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+      />
+      <p class="hidden font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+        Couldn't load LeetCode stats right now.
+      </p>
+    </>
+  )}
+</div>

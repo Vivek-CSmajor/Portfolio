@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import GithubGraph from "../components/GithubGraph.astro";
+import LeetcodeGraph from "../components/LeetcodeGraph.astro";
 import { siteConfig } from "../config/site.config";
 
 const nav = [
@@ -197,6 +198,11 @@ const posts = [
       </h2>
       <div class="mt-8">
         <GithubGraph />
+      </div>
+
+      <p class="mt-10 font-meta text-sm font-bold tracking-[0.2em] uppercase">LeetCode Stats</p>
+      <div class="mt-4">
+        <LeetcodeGraph />
       </div>
     </section>
 

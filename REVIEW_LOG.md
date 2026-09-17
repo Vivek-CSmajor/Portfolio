@@ -272,3 +272,35 @@ fix.
   whether that's read as reinforcement or redundancy, deferred to the
   "Consistency" principle review.
 
+## Iteration 7 — Hero (name + one clear positioning line)
+
+**Checklist item:** "Hero: name + one clear positioning line (not
+generic 'aspiring dev')."
+
+**What changed:** Nothing — this content already existed in the
+pre-loop baseline homepage and was verified rather than reimplemented.
+Flagged in iteration 6's follow-up: this item (along with Short intro,
+Featured work, and Tech stack) was left unchecked in
+`REVIEW_CHECKLIST.md` even though the underlying content was already
+present, because iteration 1 judged it satisfied without formally
+checking it off. This iteration closes that gap for Hero specifically.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright and confirmed via direct DOM read: the `<h1>` renders
+"Vivek Pandey" as the single largest, most visually dominant element
+on the page (display font, up to 9xl, centered, first thing after the
+nav), and the subhead banner directly below it reads "Backend
+Developer — Go, AWS, and the Systems Underneath Telephony/VoIP" — a
+specific, concrete positioning statement naming real technologies and
+a domain focus, not a generic "aspiring developer" placeholder.
+Screenshot confirms visual hierarchy matches. Zero console errors.
+
+**Self-grade: Done.** Both required elements (name, one clear
+positioning line) are present and satisfy the bullet's explicit
+"not generic" constraint. No code change was necessary.
+
+**Follow-up needed:** None for this item. Two more items from the
+same iteration-6 flag remain to be verified-and-checked in future
+iterations: "Short intro" and "Featured work section" / "Tech stack
+section" — next up per checklist order is Short intro.
+

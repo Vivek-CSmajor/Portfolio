@@ -5,7 +5,7 @@ item, fix it, verify with a screenshot, then check it off in
 `REVIEW_LOG.md` (not this file — this file stays the master list).
 
 ## Structure & content (does it have the right things)
-- [ ] Hero: name + one clear positioning line (not generic "aspiring dev")
+- [x] Hero: name + one clear positioning line (not generic "aspiring dev")
 - [ ] Short intro (2-4 sentences), current role + focus area named
 - [ ] Featured work section: 3-5 highlights max, each with impact framing
       (not just a tech list)

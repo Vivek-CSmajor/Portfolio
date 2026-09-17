@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import GithubGraph from "../components/GithubGraph.astro";
 import LeetcodeGraph from "../components/LeetcodeGraph.astro";
 import { siteConfig } from "../config/site.config";
+import { posts as allPosts } from "../data/posts";
 
 const nav = [
   { label: "Work", href: "#work" },
@@ -19,20 +20,17 @@ const skills = [
   { label: "Data / BI", items: "Power BI, DAX, Power Query" },
 ];
 
-const posts = [
-  {
-    title: "Go + Gin Patterns I Keep Reaching For",
-    teaser: "Middleware, error handling, and project layout conventions that held up once things got messy at work.",
-  },
-  {
-    title: "Building an Offline Judging Engine",
-    teaser: "Architecture walkthrough of the sandboxed execution and ICPC-style scoring behind the coding assessment platform.",
-  },
-  {
-    title: "What I Learned Building SIP/VoIP Integrations",
-    teaser: "Notes from wiring up monitoring for real-time call infrastructure — the parts the RFC doesn't warn you about.",
-  },
-];
+const posts = [...allPosts]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 3)
+  .map((post) => ({
+    ...post,
+    formattedDate: new Date(post.date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }),
+  }));
 ---
 
 <Layout
@@ -216,12 +214,21 @@ const posts = [
               {String(i + 1).padStart(2, "0")}
             </span>
             <div>
-              <h3 class="font-headline text-2xl uppercase leading-tight tracking-tight sm:text-3xl">
+              <p class="font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/60">
+                {post.formattedDate}
+              </p>
+              <h3 class="mt-1 font-headline text-2xl uppercase leading-tight tracking-tight sm:text-3xl">
                 {post.title}
               </h3>
               <p class="mt-2 font-body text-lg leading-snug">
                 {post.teaser}
               </p>
+              <a
+                href={`/blog/${post.slug}`}
+                class="mt-3 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide"
+              >
+                Read More &rarr;
+              </a>
             </div>
           </article>
         ))}

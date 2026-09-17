@@ -332,3 +332,89 @@ in range, role named, focus area named. No code change was necessary.
 "Featured work section" and "Tech stack section" still need the same
 verify-and-checkoff pass — next up per checklist order.
 
+
+## Iteration 9 — Tech stack section (real downloaded icon assets)
+
+**Checklist item:** "Tech stack section: grouped by category (languages
+/ frameworks / cloud / other), using real downloaded icon assets (see
+'Icon & logo assets' below), not plain text labels or emoji."
+
+**Note on checklist state:** At the start of this iteration,
+`REVIEW_CHECKLIST.md` and `run-review-loop.sh` had uncommitted working-
+tree edits (present before this session started) that expanded the
+checklist with new "Visual polish" and "Icon & logo assets" sections
+and tightened the Tech stack wording — and, as a side effect, reset
+every previously-checked "Structure & content" box (Hero, Short intro,
+GitHub graph, LeetCode graph, Blog preview, Education, Contact block,
+Footer) back to unchecked, even though this log shows them verified
+done through iteration 8. I did not re-verify or re-check those in
+this iteration — only Tech stack, per the "one item per iteration"
+rule. Flagging so a future iteration doesn't waste a pass rebuilding
+things that already exist; a quick re-verify-and-recheck pass (like
+iterations 7–8 did for Hero/Short intro) should close them out fast.
+
+**What changed:**
+- The Skills section already existed, grouped by category (Languages,
+  Frameworks, Cloud/Infra, Domain, Data/BI), but rendered each group's
+  items as one plain comma-separated text string with no icons —
+  failing the new "real downloaded icon assets, not plain text labels"
+  requirement.
+- Downloaded real monochrome SVG icons from the `simple-icons` npm
+  package (installed temporarily to source the files, then removed —
+  the SVGs themselves are what's kept in the repo) into
+  `public/icons/`: `go.svg`, `cplusplus.svg`, `gin.svg`, `django.svg`,
+  `fastapi.svg`, `githubactions.svg`, `git.svg`.
+- Added `src/components/TechIcon.astro`: reads a given icon's raw SVG
+  from `public/icons/` at build time, extracts its `viewBox` and path
+  data, and re-renders it as an inline `<svg>` with `fill-current` so
+  it recolors via CSS to match the site's ink color — one consistent
+  monochrome system rather than brand-colored logos.
+- Restructured the `skills` data in `index.astro` from
+  `{ label, items: "Go, C++" }` to `{ label, items: [{ name, icon? }] }`
+  per category, and updated the Skills section markup to render each
+  item as a bordered chip with its icon (when one exists) next to its
+  name, replacing the old plain-text `<dd>`.
+- For items with no real, trademarked logo to download (AWS — Simple
+  Icons has no AWS entry; VoIP/SIP, REST APIs, Competitive Programming,
+  Power BI, DAX, Power Query — concepts/tools without a distinct brand
+  mark in Simple Icons), the chip renders as a text-only tag rather
+  than inventing or faking an icon. This is an intentional, honest gap,
+  not an oversight.
+
+**Verified:** Dev server already running on port 4321. Since no
+browser-automation tool was preloaded in this environment, installed
+Playwright + Chromium in a scratch directory (`/tmp/pw-check`) and
+drove it directly: loaded the homepage, screenshotted the `#skills`
+section at both 1280px and 375px widths, and checked
+`page.on("console"/"pageerror")` for errors — none. Screenshots confirm
+7 real icons (Go, C++, Gin, Django, FastAPI, GitHub Actions, Git) render
+crisp, black, and consistently sized inline next to their category-
+grouped labels, with graceful text-only tags for the items that have no
+real downloadable logo. No horizontal overflow or wrapping issues at
+375px.
+
+**Self-grade: Done for this bullet specifically.** Grouped-by-category
+✅, real downloaded SVG assets (not emoji/plain text) ✅ for every item
+that has an actual brand mark to download. The broader "Icon & logo
+assets" checklist section (consistent sizing/alignment, accessible
+labels, and covering GitHub/LeetCode/social icons elsewhere on the
+site) is a separate, still-unchecked checklist section — this
+iteration only touched the Tech Stack icons themselves, per the
+one-item-per-iteration rule. Accessible-label handling here relies on
+the visible adjacent text label (icons are `aria-hidden`), which
+satisfies intent but wasn't a formal `aria-label` audit — worth
+confirming when the "Icon & logo assets" section gets its own pass.
+
+**Follow-up needed:**
+- Re-verify-and-recheck pass needed for the structure/content items
+  that this session's uncommitted checklist edit reset to unchecked
+  (see note above) — Hero, Short intro, GitHub graph, LeetCode graph,
+  Blog preview, Education, Contact block, Footer all appear intact on
+  a spot check of the homepage during this iteration's screenshot pass.
+- The "Icon & logo assets" checklist section (consistent sizing across
+  *all* site icons, GitHub/LeetCode/social logos, formal alt text) is
+  still fully unchecked and is naturally the next related item.
+- "Featured work section" bullet also still needs its verify-and-
+  checkoff pass (content already exists and looks complete — 3 items,
+  each with impact framing — from a spot check, but not formally
+  re-verified this iteration).

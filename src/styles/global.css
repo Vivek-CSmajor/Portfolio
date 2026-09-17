@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f2f1ed;
+  --color-ink: #000000;
+
+  --font-display: "Amarante", serif;
+  --font-headline: "Anton", sans-serif;
+  --font-body: "Athiti", sans-serif;
+  --font-meta: "Inter", sans-serif;
+  --font-accent: "Kurale", serif;
+}
+
+body {
+  background-color: var(--color-paper);
+  background-image: url("/images/paper-bg.jpg");
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  color: var(--color-ink);
+}

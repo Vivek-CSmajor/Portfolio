@@ -233,3 +233,42 @@ without needing sticky-nav behavior.
   redundant when the "Consistency" psychological-principle item is
   reviewed.
 
+## Iteration 6 — Footer (copyright, socials, no dead links)
+
+**Checklist item:** "Footer: copyright, socials, no dead links."
+
+**What changed:**
+- The footer previously had no copyright line and no social links at
+  all — just "No. 001", a decorative seal, and "September 2026".
+  Added a second row below it (separated by a border, matching the
+  site's rule-line motif): `© {currentYear} Vivek Pandey. All rights
+  reserved.` on the left, and Email/LinkedIn/GitHub links on the
+  right.
+- `currentYear` is computed with `new Date().getFullYear()` at build
+  time rather than hardcoded, so the copyright year doesn't go stale.
+- Email/LinkedIn/GitHub links pull from `siteConfig` (same pattern as
+  the top nav and Contact section) — no new hardcoded values, and
+  LinkedIn/GitHub correctly resolve to the `YOUR_LINKEDIN_USERNAME` /
+  `YOUR_GITHUB_USERNAME` placeholders rather than a broken `#` or an
+  invented username.
+- Left the original top row (No. 001 / seal / date) untouched.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright, screenshotted the `<footer>` element specifically,
+and confirmed via `$$eval` that all three footer links resolve to the
+expected `mailto:`, LinkedIn, and GitHub URLs (the config placeholders,
+not `#`). Zero console errors.
+
+**Self-grade: Done.** Footer now has all three required elements:
+copyright text, socials, and no dead (`#`) links — the LinkedIn/GitHub
+links point at the intentional config placeholders, which is the
+correct state per this loop's standing instruction, not a defect to
+fix.
+
+**Follow-up needed:**
+- None specific to this item. The footer's social links duplicate the
+  top-nav and Contact-section links, which is consistent with how
+  those were already handled in iteration 5 — same open question about
+  whether that's read as reinforcement or redundancy, deferred to the
+  "Consistency" principle review.
+

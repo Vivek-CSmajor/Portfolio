@@ -22,7 +22,7 @@ item, fix it, verify with a screenshot, then check it off in
 - [x] Education: one compact line on homepage, full detail on About
 - [x] Contact block: email, LinkedIn, GitHub, resume link — visible above
       the fold or in a persistent nav, not buried only in the footer
-- [ ] Footer: copyright, socials, no dead links
+- [x] Footer: copyright, socials, no dead links
 
 ## Psychological / persuasion principles
 - [ ] **Visual hierarchy** — the single most important thing on each

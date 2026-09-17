@@ -100,3 +100,49 @@ resolving to real data.
   on About page, Contact block placement, Footer, all psychological
   principles, and technical/UX baseline items) are still unchecked.
 
+## Iteration 3 — Blog preview (title + date + link)
+
+**Checklist item:** "Blog preview (2-3 latest posts, title + date +
+link)."
+
+**What changed:**
+- Added `src/data/posts.ts`: a shared data module holding the 3 blog
+  posts as `{ slug, title, date, teaser, body }`, replacing the
+  title/teaser-only array that was previously inlined in `index.astro`
+  with no date and no link target. Dates and body content are regular
+  editorial content (not identity-dependent), so they're written
+  directly rather than routed through `site.config.ts`.
+- Added `src/pages/blog/[slug].astro`: a static route
+  (`getStaticPaths`) that renders each post as a full page — date,
+  title, body paragraphs, and a "Back to Home" link — styled
+  consistently with the homepage (same fonts, borders, spacing).
+- Updated the homepage's "From the Blog" section to source posts from
+  the shared data module, sort by date descending, take the latest 3,
+  show a formatted date under each title, and add a "Read More →" link
+  to `/blog/{slug}` — so the preview now has all three required
+  elements instead of just title + teaser.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright, screenshotted the `#blog` section (shows date + title
++ teaser + working link for all 3 posts), then followed the actual
+rendered link (`/blog/go-gin-patterns`) and screenshotted the
+destination page — it renders the full post with no console errors on
+either page.
+
+**Self-grade: Done.** All three required elements (title, date, link)
+are present, sorted correctly by recency, and the link is a real,
+working destination rather than a placeholder `#` — this also removes
+what would otherwise have counted as a dead link in the Footer/
+technical-baseline checks later.
+
+**Follow-up needed:**
+- There's no `/blog` index/listing page yet — only individual post
+  pages exist, reachable currently only from the homepage preview.
+  That's fine for this checklist bullet (which only requires the
+  homepage preview), but the "Nav is present and consistent across
+  home/blog/projects/about" item will need a real blog listing page
+  and shared nav component; deferred to that item's own iteration.
+- Blog post pages use a minimal ad hoc header ("← Back to Home") rather
+  than the full site nav — intentional, to avoid solving nav
+  consistency in this iteration.
+

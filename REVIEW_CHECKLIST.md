@@ -18,7 +18,7 @@ item, fix it, verify with a screenshot, then check it off in
 - [x] LeetCode stats graph component built and wired to a config
       placeholder the same way — renders correctly with the placeholder,
       ready to go live the moment a real username is dropped in
-- [ ] Blog preview (2-3 latest posts, title + date + link)
+- [x] Blog preview (2-3 latest posts, title + date + link)
 - [ ] Education: one compact line on homepage, full detail on About
 - [ ] Contact block: email, LinkedIn, GitHub, resume link — visible above
       the fold or in a persistent nav, not buried only in the footer

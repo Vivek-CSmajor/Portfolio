@@ -304,3 +304,31 @@ same iteration-6 flag remain to be verified-and-checked in future
 iterations: "Short intro" and "Featured work section" / "Tech stack
 section" — next up per checklist order is Short intro.
 
+## Iteration 8 — Short intro (2-4 sentences, role + focus area named)
+
+**Checklist item:** "Short intro (2-4 sentences), current role +
+focus area named."
+
+**What changed:** Nothing — same situation as iteration 7. The lede
+paragraph already existed in the pre-loop baseline and was verified
+against this specific bullet rather than reimplemented.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright, extracted the lede paragraph's text directly from the
+DOM, and counted sentences programmatically: 3 sentences (within the
+2-4 range) — "Currently a backend engineering intern at Vobiz.ai,
+working on core messaging infrastructure (SMS/RCS) and AI voice agent
+tooling for an AI-first telephony platform. CS undergrad at Amity
+University, Lucknow. Language-agnostic by design — Go is home base,
+but the interesting part is the systems, not the syntax." Current role
+("backend engineering intern at Vobiz.ai") and focus area (messaging
+infrastructure, AI voice agent tooling, telephony platform) are both
+explicitly named. Screenshot confirms rendering. Zero console errors.
+
+**Self-grade: Done.** All required elements present: sentence count
+in range, role named, focus area named. No code change was necessary.
+
+**Follow-up needed:** One item remains from the iteration-6 backlog:
+"Featured work section" and "Tech stack section" still need the same
+verify-and-checkoff pass — next up per checklist order.
+

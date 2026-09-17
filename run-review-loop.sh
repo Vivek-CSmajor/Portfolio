@@ -22,6 +22,32 @@ if [ ! -f "$LOG_FILE" ]; then
   echo "" >> "$LOG_FILE"
 fi
 
+# --- GitHub safety: remove any remotes for the duration of the loop, so
+# even if a run attempts `git push`, there's nothing to push to. Restored
+# on exit (normal finish, error, or Ctrl+C) via the trap below.
+SAVED_REMOTES_FILE="$(mktemp)"
+git remote -v 2>/dev/null | awk '{print $1, $2}' | sort -u > "$SAVED_REMOTES_FILE" || true
+
+restore_remotes() {
+  if [ -s "$SAVED_REMOTES_FILE" ]; then
+    while read -r name url; do
+      [ -z "$name" ] && continue
+      git remote add "$name" "$url" 2>/dev/null || git remote set-url "$name" "$url" 2>/dev/null || true
+    done < "$SAVED_REMOTES_FILE"
+    echo "Git remote(s) restored: $(git remote -v | tr '\n' ' ')"
+  fi
+  rm -f "$SAVED_REMOTES_FILE"
+}
+trap restore_remotes EXIT
+
+if [ -s "$SAVED_REMOTES_FILE" ]; then
+  while read -r name _; do
+    [ -z "$name" ] && continue
+    git remote remove "$name" 2>/dev/null || true
+  done < "$SAVED_REMOTES_FILE"
+  echo "Git remote(s) temporarily removed for this run — commits stay local until you push yourself."
+fi
+
 for i in $(seq 1 "$MAX_ITER"); do
   echo ""
   echo "=== Iteration $i / $MAX_ITER ==="
@@ -60,14 +86,37 @@ Implement the picked item fully, following the above where relevant. Then:
    item, what you changed, the self-grade, and one sentence on what (if
    anything) still needs follow-up.
 4. If you completed the item, check its box in REVIEW_CHECKLIST.md.
-5. Commit the change with a clear commit message referencing the checklist
-   item.
+5. Commit the change locally with a clear commit message referencing the
+   checklist item.
+
+NEVER push, fetch from, or otherwise contact any git remote or GitHub —
+no 'git push', 'git fetch', 'git pull', no 'gh' CLI commands (repo create,
+pr create, etc.), no GitHub API calls. Local commits only. This project's
+remote has been intentionally detached for this run; do not attempt to
+re-add one. If you believe a remote action is genuinely needed, stop and
+say so in REVIEW_LOG.md instead of doing it.
 
 Do not attempt multiple checklist items in one iteration. Do not restyle
 or 'improve' anything not on the checklist. If every item is already
 checked, instead do a fresh critical pass: re-open the two most
 content-heavy pages, re-check them against the psychological-principles
-section specifically, and log honestly whether anything regressed."
+section specifically, and log honestly whether anything regressed.
+
+BE MORE CREATIVE THAN YOUR DEFAULT. Earlier rounds tended to play it safe —
+technically correct, visually flat, minimal deviation from a generic
+template. When you pick a 'Visual polish / creative beautification' item,
+actually push: try an unusual layout, a bold typographic moment, a hover/
+scroll interaction, an asymmetric composition — something a generic
+template wouldn't produce — while staying inside the established color
+palette, fonts, and spacing tokens (bolder USE of the existing design
+language, not a new one). If a change feels safe/expected, that's a signal
+to go further, not a signal it's done. When working on the tech stack
+section or any icon/logo, actually download real SVG icon assets into the
+project (e.g. from simpleicons.org, or 'npm install simple-icons') —
+prefer monochrome/black-and-white versions recolored via CSS
+(fill: currentColor) so they read as one consistent visual system rather
+than mismatched brand-colored logos. Never leave icons as emoji or plain
+text placeholders when a real icon asset is what the checklist calls for."
 
   if [ "$i" -eq 1 ]; then
     claude -p "$PROMPT" --dangerously-skip-permissions

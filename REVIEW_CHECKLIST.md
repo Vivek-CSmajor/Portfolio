@@ -5,24 +5,25 @@ item, fix it, verify with a screenshot, then check it off in
 `REVIEW_LOG.md` (not this file — this file stays the master list).
 
 ## Structure & content (does it have the right things)
-- [x] Hero: name + one clear positioning line (not generic "aspiring dev")
-- [x] Short intro (2-4 sentences), current role + focus area named
+- [ ] Hero: name + one clear positioning line (not generic "aspiring dev")
+- [ ] Short intro (2-4 sentences), current role + focus area named
 - [ ] Featured work section: 3-5 highlights max, each with impact framing
       (not just a tech list)
-- [ ] Tech stack section: grouped by category (languages / frameworks /
-      cloud / other), icons or clean text — not a giant unstructured wall
-- [x] GitHub contribution graph component built and wired to a config
+- [x] Tech stack section: grouped by category (languages / frameworks /
+      cloud / other), using real downloaded icon assets (see "Icon &
+      logo assets" below), not plain text labels or emoji
+- [ ] GitHub contribution graph component built and wired to a config
       placeholder (see "Placeholder-ready integrations" below) — renders
       correctly with the placeholder value, ready to go live the moment a
       real username is dropped in
-- [x] LeetCode stats graph component built and wired to a config
+- [ ] LeetCode stats graph component built and wired to a config
       placeholder the same way — renders correctly with the placeholder,
       ready to go live the moment a real username is dropped in
-- [x] Blog preview (2-3 latest posts, title + date + link)
-- [x] Education: one compact line on homepage, full detail on About
-- [x] Contact block: email, LinkedIn, GitHub, resume link — visible above
+- [ ] Blog preview (2-3 latest posts, title + date + link)
+- [ ] Education: one compact line on homepage, full detail on About
+- [ ] Contact block: email, LinkedIn, GitHub, resume link — visible above
       the fold or in a persistent nav, not buried only in the footer
-- [x] Footer: copyright, socials, no dead links
+- [ ] Footer: copyright, socials, no dead links
 
 ## Psychological / persuasion principles
 - [ ] **Visual hierarchy** — the single most important thing on each
@@ -43,6 +44,44 @@ item, fix it, verify with a screenshot, then check it off in
       per screen (view project, read post, contact) — never a dead end
 - [ ] **Whitespace as a feature** — sections have breathing room; density
       is a deliberate choice, not a leftover of not deciding on spacing
+
+## Visual polish / creative beautification
+The first pass tends to play it safe — technically correct, visually flat.
+These items exist specifically to push past that:
+- [ ] At least one section has a genuinely distinctive visual treatment
+      beyond "card in a grid" — an unusual layout, an interesting hover/
+      reveal interaction, an asymmetric composition, a typographic moment
+      (a huge stat number, an oversized quote) — something a generic
+      template wouldn't have
+- [ ] Micro-interactions exist somewhere (hover states that do more than
+      change opacity, a subtle transition on scroll, an animated
+      underline) — small, tasteful, not gimmicky
+- [ ] The color palette and type scale from the established design
+      direction are used more expressively in at least one section —
+      e.g. a bold color block, a large display-type moment — rather than
+      applied uniformly and cautiously everywhere
+- [ ] A design pass has been made explicitly asking "what would make a
+      visitor stop scrolling for a second here?" for the hero and one
+      other section, and something was changed as a result
+- [ ] Nothing here breaks the established design system (colors/fonts/
+      spacing tokens) — creative means bolder use of the existing
+      language, not a clashing new one
+
+## Icon & logo assets
+- [ ] Tech stack icons and any relevant tool/platform logos (GitHub,
+      LeetCode, socials) are actual downloaded SVG assets in the project
+      (e.g. `/public/icons/`), not inline emoji or missing entirely
+- [ ] Prefer monochrome/black-and-white icon sets so they read as part of
+      one visual system rather than a mismatched row of brand colors —
+      **Simple Icons** (simpleicons.org) is a good source: every logo is
+      available as a plain SVG and can be recolored via CSS
+      (`fill: currentColor`) to match the site's ink/accent color, either
+      downloaded directly or via `npm install simple-icons` and imported
+      per-icon
+- [ ] Icons are sized and aligned consistently (same viewBox handling,
+      same optical size) — not a mix of oddly-scaled logos
+- [ ] Each icon has an accessible label (alt text / aria-label), not just
+      a bare image
 
 ## Technical/UX baseline
 - [ ] Responsive at mobile width (375px) — no horizontal scroll, no

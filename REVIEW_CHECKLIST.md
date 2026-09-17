@@ -15,7 +15,7 @@ item, fix it, verify with a screenshot, then check it off in
       placeholder (see "Placeholder-ready integrations" below) — renders
       correctly with the placeholder value, ready to go live the moment a
       real username is dropped in
-- [ ] LeetCode stats graph component built and wired to a config
+- [x] LeetCode stats graph component built and wired to a config
       placeholder the same way — renders correctly with the placeholder,
       ready to go live the moment a real username is dropped in
 - [ ] Blog preview (2-3 latest posts, title + date + link)

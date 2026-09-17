@@ -146,3 +146,44 @@ technical-baseline checks later.
   than the full site nav — intentional, to avoid solving nav
   consistency in this iteration.
 
+## Iteration 4 — Education (compact on homepage, full detail on About)
+
+**Checklist item:** "Education: one compact line on homepage, full
+detail on About."
+
+**What changed:**
+- Added `src/pages/about.astro`: a new page with an `#education`
+  section giving the full detail — degree name, institution, location,
+  timeline (2024–2028, expected), CGPA, and one descriptive sentence —
+  all drawn from confirmed facts (nothing invented beyond what was
+  already on the homepage). Styled consistently with the rest of the
+  site (same fonts/borders/spacing), with a minimal "← Back to Home"
+  link rather than the full site nav, matching the same ad hoc-header
+  approach used for blog post pages in iteration 3.
+- Updated the homepage's compact education line to add a "Full Detail
+  →" link pointing to `/about#education`, so the compact line and the
+  full detail page are actually connected rather than the About page
+  being an orphaned, unreachable route.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright, located the actual rendered `/about#education` link,
+followed it, and screenshotted the resulting About page — the
+Education section renders with all the detail fields, correctly
+anchored, no console errors on either page.
+
+**Self-grade: Done.** The compact line already existed on the
+homepage from before this loop started; this iteration added the
+missing half — a real, linked About page with the fuller detail.
+Both halves of the checklist bullet are now satisfied.
+
+**Follow-up needed:**
+- The About page currently contains only the Education section — no
+  broader bio/intro beyond the page header. That's intentional scope
+  control for this bullet, but if a future checklist item calls for a
+  fuller About page (bio, etc.), this page will need to grow rather
+  than be replaced.
+- Same nav-consistency deferral as blog pages: About uses an ad hoc
+  back-link, not the shared site nav — to be resolved together with
+  the "Nav is present and consistent across home/blog/projects/about"
+  item.
+

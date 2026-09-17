@@ -1,0 +1,41 @@
+---
+import { siteConfig, isPlaceholder } from "../config/site.config";
+
+const showPlaceholder = isPlaceholder(siteConfig.githubUsername);
+const chartUrl = `https://ghchart.rshah.org/000000/${siteConfig.githubUsername}`;
+// Deterministic pseudo-random fill so the placeholder grid looks like a
+// contribution graph rather than a uniform block.
+const placeholderCells = Array.from({ length: 17 * 7 }, (_, i) => (i * 37) % 5);
+---
+
+<div class="border-2 border-black p-6" data-github-graph>
+  {showPlaceholder ? (
+    <div class="flex flex-col gap-4">
+      <div class="grid grid-flow-col grid-rows-7 gap-1">
+        {placeholderCells.map((level) => (
+          <span
+            class="h-3 w-3 border border-black"
+            style={`background-color: rgba(0,0,0,${level * 0.15});`}
+          />
+        ))}
+      </div>
+      <p class="font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+        GitHub activity will appear here — add a GitHub username in{" "}
+        <code class="font-mono">site.config.ts</code> to go live.
+      </p>
+    </div>
+  ) : (
+    <>
+      <img
+        src={chartUrl}
+        alt={`${siteConfig.githubUsername}'s GitHub contribution graph`}
+        loading="lazy"
+        class="w-full"
+        onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+      />
+      <p class="hidden font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+        Couldn't load the GitHub contribution graph right now.
+      </p>
+    </>
+  )}
+</div>

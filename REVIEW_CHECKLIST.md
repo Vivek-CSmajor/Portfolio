@@ -11,7 +11,7 @@ item, fix it, verify with a screenshot, then check it off in
       (not just a tech list)
 - [ ] Tech stack section: grouped by category (languages / frameworks /
       cloud / other), icons or clean text — not a giant unstructured wall
-- [ ] GitHub contribution graph component built and wired to a config
+- [x] GitHub contribution graph component built and wired to a config
       placeholder (see "Placeholder-ready integrations" below) — renders
       correctly with the placeholder value, ready to go live the moment a
       real username is dropped in

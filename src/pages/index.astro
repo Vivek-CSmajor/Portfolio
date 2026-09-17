@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import GithubGraph from "../components/GithubGraph.astro";
+import { siteConfig } from "../config/site.config";
 
 const nav = [
   { label: "Work", href: "#work" },
@@ -46,7 +48,7 @@ const posts = [
         ))}
         <li>
           <a
-            href="/resume.pdf"
+            href={siteConfig.resumeUrl}
             class="border-2 border-black bg-black px-4 py-2 text-white hover:bg-white hover:text-black"
           >
             Résumé
@@ -187,6 +189,17 @@ const posts = [
       </dl>
     </section>
 
+    <!-- GitHub activity -->
+    <section id="activity" class="border-t-4 border-black py-12">
+      <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">GitHub Activity</p>
+      <h2 class="mt-2 font-headline text-4xl uppercase leading-[0.95] tracking-tight sm:text-6xl">
+        Contribution Graph
+      </h2>
+      <div class="mt-8">
+        <GithubGraph />
+      </div>
+    </section>
+
     <!-- Blog preview -->
     <section id="blog" class="border-t-4 border-black py-12">
       <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">From the Blog</p>
@@ -216,10 +229,10 @@ const posts = [
         Let's talk backend systems, telephony, or otherwise.
       </h2>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-4 font-meta text-sm font-bold uppercase tracking-wide">
-        <a href="mailto:vivek.csmajor@gmail.com" class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">Email</a>
-        <a href="#" class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">LinkedIn</a>
-        <a href="#" class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">GitHub</a>
-        <a href="/resume.pdf" class="border-2 border-black bg-black px-5 py-2.5 text-white hover:bg-white hover:text-black">Résumé</a>
+        <a href={`mailto:${siteConfig.email}`} class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">Email</a>
+        <a href={siteConfig.linkedinUrl} class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">LinkedIn</a>
+        <a href={siteConfig.githubUrl} class="border-2 border-black px-5 py-2.5 hover:bg-black hover:text-white">GitHub</a>
+        <a href={siteConfig.resumeUrl} class="border-2 border-black bg-black px-5 py-2.5 text-white hover:bg-white hover:text-black">Résumé</a>
       </div>
     </section>
 

@@ -6,7 +6,7 @@ item, fix it, verify with a screenshot, then check it off in
 
 ## Structure & content (does it have the right things)
 - [x] Hero: name + one clear positioning line (not generic "aspiring dev")
-- [ ] Short intro (2-4 sentences), current role + focus area named
+- [x] Short intro (2-4 sentences), current role + focus area named
 - [ ] Featured work section: 3-5 highlights max, each with impact framing
       (not just a tech list)
 - [ ] Tech stack section: grouped by category (languages / frameworks /

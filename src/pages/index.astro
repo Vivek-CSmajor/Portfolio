@@ -45,6 +45,9 @@ const posts = [...allPosts]
         {nav.map((item) => (
           <li><a href={item.href} class="hover:underline underline-offset-4">{item.label}</a></li>
         ))}
+        <li><a href={`mailto:${siteConfig.email}`} class="hover:underline underline-offset-4">Email</a></li>
+        <li><a href={siteConfig.linkedinUrl} class="hover:underline underline-offset-4">LinkedIn</a></li>
+        <li><a href={siteConfig.githubUrl} class="hover:underline underline-offset-4">GitHub</a></li>
         <li>
           <a
             href={siteConfig.resumeUrl}

@@ -187,3 +187,49 @@ Both halves of the checklist bullet are now satisfied.
   the "Nav is present and consistent across home/blog/projects/about"
   item.
 
+## Iteration 5 — Contact block visible above the fold
+
+**Checklist item:** "Contact block: email, LinkedIn, GitHub, resume
+link — visible above the fold or in a persistent nav, not buried only
+in the footer."
+
+**What changed:**
+- Added Email, LinkedIn, and GitHub links to the existing top utility
+  nav in `index.astro` (which sits at the very top of the page, before
+  any scrolling), alongside the Résumé button that was already there.
+  All three pull from `siteConfig` (`email`, `linkedinUrl`,
+  `githubUrl`) — no new hardcoded values.
+- Did not touch the full Contact section further down the page (still
+  present, unchanged) — this was purely about making the same four
+  contact methods reachable above the fold too, per the checklist's
+  "visible above the fold OR in a persistent nav" phrasing. Chose
+  "above the fold" (plain text links in the existing top nav) over
+  making the nav `position: sticky`, since sticky-scroll behavior
+  wasn't asked for and would be a restyle beyond this bullet's scope.
+
+**Verified:** Dev server running on port 4321. Loaded the homepage
+with Playwright at both 1280px and 375px viewports, took a screenshot
+of the viewport only (no scrolling, i.e. exactly what's "above the
+fold"), and confirmed via `$$eval` that all four nav links resolve to
+the correct `mailto:`, LinkedIn, GitHub, and resume URLs. No console
+errors at either width, no wrapping/overlap issues on mobile (nav
+items wrap onto their own lines cleanly instead of overflowing).
+
+**Self-grade: Done.** All four contact methods (email, LinkedIn,
+GitHub, résumé) are now visible in the first viewport a visitor sees,
+satisfying the "above the fold" branch of the requirement directly,
+without needing sticky-nav behavior.
+
+**Follow-up needed:**
+- The nav is not sticky, so on a long scroll session (e.g. reading the
+  blog preview near the bottom) a visitor would need to scroll back up
+  to reach these links — the checklist's "or in a persistent nav"
+  branch would close that gap, but that's a UX polish choice beyond
+  what this bullet strictly requires, and is a candidate for a later
+  polish-pass iteration rather than this one.
+- The bottom Contact section (`#contact`) still duplicates these same
+  four links by design (kept as-is, unchanged) — worth confirming this
+  duplication reads as intentional reinforcement rather than
+  redundant when the "Consistency" psychological-principle item is
+  reviewed.
+

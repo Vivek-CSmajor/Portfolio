@@ -18,3 +18,57 @@ body {
   background-repeat: repeat;
   color: var(--color-ink);
 }
+
+/* Prose formatting for markdown-rendered blog post bodies. */
+.post-content h2 {
+  @apply mt-12 mb-5 bg-black px-5 py-4 font-headline text-2xl uppercase leading-tight tracking-tight text-white first:mt-0 sm:text-3xl;
+}
+
+.post-content h3 {
+  @apply mt-8 mb-3 font-headline text-xl uppercase leading-tight tracking-tight sm:text-2xl;
+}
+
+.post-content p {
+  @apply mb-5 font-body text-lg leading-snug;
+}
+
+.post-content ul,
+.post-content ol {
+  @apply mb-5 ml-5 list-disc space-y-2 font-body text-lg leading-snug;
+}
+
+.post-content ol {
+  @apply list-decimal;
+}
+
+.post-content strong {
+  @apply font-bold;
+}
+
+.post-content em {
+  @apply italic;
+}
+
+.post-content a {
+  @apply underline underline-offset-4 hover:opacity-70;
+}
+
+.post-content code {
+  @apply border border-black bg-black/5 px-1.5 py-0.5 font-mono text-base;
+}
+
+.post-content pre {
+  @apply mb-5 overflow-x-auto border-2 border-black bg-black p-4 text-white;
+}
+
+.post-content pre code {
+  @apply border-0 bg-transparent p-0 text-white;
+}
+
+.post-content blockquote {
+  @apply my-6 border-l-4 border-black pl-4 font-body text-xl italic leading-snug;
+}
+
+.post-content hr {
+  @apply my-10 border-t-2 border-black;
+}

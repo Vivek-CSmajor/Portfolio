@@ -8,34 +8,56 @@ const chartUrl = `https://ghchart.rshah.org/000000/${siteConfig.githubUsername}`
 const placeholderCells = Array.from({ length: 17 * 7 }, (_, i) => (i * 37) % 5);
 ---
 
-<div class="border-2 border-black p-6" data-github-graph>
-  {showPlaceholder ? (
-    <div class="flex flex-col gap-4">
-      <div class="grid grid-flow-col grid-rows-7 gap-1">
-        {placeholderCells.map((level) => (
-          <span
-            class="h-3 w-3 border border-black"
-            style={`background-color: rgba(0,0,0,${level * 0.15});`}
-          />
-        ))}
+<div class="border-4 border-black" data-github-graph>
+  <div class="flex min-h-20 items-center justify-between gap-4 bg-black px-6 py-4 text-white">
+    <div class="flex items-center gap-3">
+      <img src="/icons/github-octocat.png" alt="" aria-hidden="true" class="h-7 w-7 shrink-0 object-contain invert" />
+      <div>
+        <p class="font-meta text-xs font-bold uppercase tracking-[0.2em] text-white/70">
+          Contribution Graph
+        </p>
+        <h3 class="mt-1 font-headline text-2xl uppercase leading-none tracking-tight">
+          GitHub
+        </h3>
       </div>
-      <p class="font-meta text-sm font-bold uppercase tracking-wide text-black/60">
-        GitHub activity will appear here — add a GitHub username in{" "}
-        <code class="font-mono">site.config.ts</code> to go live.
-      </p>
     </div>
-  ) : (
-    <>
-      <img
-        src={chartUrl}
-        alt={`${siteConfig.githubUsername}'s GitHub contribution graph`}
-        loading="lazy"
-        class="w-full"
-        onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
-      />
-      <p class="hidden font-meta text-sm font-bold uppercase tracking-wide text-black/60">
-        Couldn't load the GitHub contribution graph right now.
-      </p>
-    </>
-  )}
+    <a
+      href={siteConfig.githubUrl}
+      class="shrink-0 border-2 border-white px-3 py-1.5 font-meta text-xs font-bold uppercase tracking-wide hover:bg-white hover:text-black"
+    >
+      @{siteConfig.githubUsername}
+    </a>
+  </div>
+
+  <div class="p-6">
+    {showPlaceholder ? (
+      <div class="flex flex-col gap-4">
+        <div class="grid grid-flow-col grid-rows-7 gap-1">
+          {placeholderCells.map((level) => (
+            <span
+              class="h-4 w-4 border border-black"
+              style={`background-color: rgba(0,0,0,${level * 0.15});`}
+            />
+          ))}
+        </div>
+        <p class="font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+          GitHub activity will appear here — add a GitHub username in{" "}
+          <code class="font-mono">site.config.ts</code> to go live.
+        </p>
+      </div>
+    ) : (
+      <>
+        <img
+          src={chartUrl}
+          alt={`${siteConfig.githubUsername}'s GitHub contribution graph`}
+          loading="lazy"
+          class="w-full grayscale contrast-125"
+          onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+        />
+        <p class="hidden font-meta text-sm font-bold uppercase tracking-wide text-black/60">
+          Couldn't load the GitHub contribution graph right now.
+        </p>
+      </>
+    )}
+  </div>
 </div>

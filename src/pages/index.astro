@@ -4,6 +4,7 @@ import path from "node:path";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import GithubGraph from "../components/GithubGraph.astro";
+import BlogPostRow from "../components/BlogPostRow.astro";
 import Icon from "../components/Icon.astro";
 import TechIcon from "../components/TechIcon.astro";
 import { siteConfig } from "../config/site.config";
@@ -31,7 +32,6 @@ const contactLinks = [
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3)
   .map((post) => ({
     slug: post.id,
     title: post.data.title,
@@ -76,18 +76,32 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
             </div>
 
             <p class="font-body text-2xl leading-snug">
-              Currently a backend engineering intern at
-              <span class="font-bold">Vobiz.ai</span>, working on core messaging
-              infrastructure (SMS/RCS) and AI voice agent tooling for an AI-first
-              telephony platform. CS undergrad at Amity University, Lucknow.
-              <span class="font-bold">Language-agnostic by design</span> — Go is
-              home base, but the interesting part is the systems, not the syntax.
+              CS undergrad and backend engineer with production-grade experience
+              in AI voice systems, CRM software, and IoT platforms, built through
+              internships — currently at Vobiz.ai.
+              Language-agnostic, though the Golang beaver is my man. I care about DSA
+              beyond the interview grind. Currently I'm exploring distributed
+              systems and OSS, and I prefer to write
+              minimal code that works, stays clean, and is actually mine
+              — not AI-generated, unless it's frontend design, in which case,
+              Claude's the man.
             </p>
           </div>
 
           <p class="mt-8 inline-flex flex-wrap items-center gap-3 border-2 border-black px-4 py-2 font-meta text-sm font-bold tracking-[0.1em] uppercase">
             Bachelor's in Technology - Computer Science & Engineering · CGPA 8.3 · 2024–2028
           </p>
+
+          <div id="activity" class="mt-8">
+            <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">GitHub Activity</p>
+            <h2 class="mt-2 flex items-center gap-3 font-headline text-4xl uppercase leading-[0.95] tracking-tight sm:text-6xl">
+              <img src="/icons/github-octocat.png" alt="" aria-hidden="true" class="h-8 w-8 shrink-0 object-contain sm:h-10 sm:w-10" />
+              Contribution Graph
+            </h2>
+            <div class="mt-8">
+              <GithubGraph />
+            </div>
+          </div>
         </div>
 
         <div class="lg:col-span-4">
@@ -106,7 +120,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
               </div>
             ))}
           </div>
-          <p class="skills-extras font-body"><strong>Also in the mix:</strong> VoIP/SIP · REST APIs · Competitive Programming <span> / </span> Power BI · DAX · Power Query</p>
         </div>
       </div>
     </section>
@@ -118,24 +131,32 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         Internships
       </h2>
 
-      <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <article class="border-4 border-black">
-          <div class="bg-black px-6 py-5 text-white">
-            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
-              Vobiz.ai
-            </h3>
-            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
-              Software Development Intern · May 2026 – Present
-            </p>
+      <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <article class="border-4 border-black lg:col-span-2">
+          <div class="flex items-center justify-between gap-4 bg-black px-6 py-5 text-white">
+            <div>
+              <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
+                Vobiz.ai
+              </h3>
+              <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
+                Software Development Intern · May 2026 – Present
+              </p>
+            </div>
+            <img
+              src="/images/logos/devlume-mark.svg"
+              alt="Vobiz.ai"
+              class="h-6 w-auto shrink-0 grayscale invert"
+            />
           </div>
           <div class="px-6 py-6">
-            <p class="font-body text-base leading-snug">
-              Building core SMS/RCS messaging features in Go for an AI-first
-              telephony platform; shipped a regression-testing microservice
-              with CI/CD via GitHub Actions; prototyped noise-cancellation
-              integrations to improve speech-to-text accuracy for AI voice
-              agents (ElevenLabs, Vapi).
-            </p>
+            <ul class="space-y-1.5 font-body text-base leading-snug">
+              <li class="flex gap-3"><span class="font-headline">—</span> Cut S3 storage costs by 97.7% — from lakhs per month to a few hundred rupees — by overhauling retention and storage practices across 30+ EC2 instances.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Built core SMS/RCS messaging features in Go for a SIP trunking platform, supporting large-scale AI conversations between voice agents and chatbots.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Designed a call recording retention and custom billing system handling 5M+ calls a day.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Diagnosed and fixed bugs across the platform's backend services, improving stability and reliability.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Designed and built a regression-testing suite microservice in Go, deployed automatically via CI/CD pipelines using GitHub Actions.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Created a microservice to monitor carrier health and report via a Slack bot in monitoring channels.</li>
+            </ul>
             <p class="mt-4 font-meta text-xs font-bold uppercase tracking-wide text-black">
               Go · AWS · CI/CD · VoIP
             </p>
@@ -143,13 +164,20 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         </article>
 
         <article class="border-4 border-black">
-          <div class="bg-black px-6 py-5 text-white">
-            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
-              Devlume Software Solutions
-            </h3>
-            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
-              Software Development Intern · Sep – Dec 2025
-            </p>
+          <div class="flex items-center justify-between gap-4 bg-black px-6 py-5 text-white">
+            <div>
+              <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
+                Devlume Software Solutions
+              </h3>
+              <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
+                Software Development Intern · Sep – Dec 2025
+              </p>
+            </div>
+            <img
+              src="/images/logos/vobiz-mark.svg"
+              alt="Devlume Software Solutions"
+              class="h-6 w-auto shrink-0 invert"
+            />
           </div>
           <div class="px-6 py-6">
             <p class="font-body text-base leading-snug">
@@ -164,19 +192,29 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
           </div>
         </article>
 
-        <article class="border-4 border-black border-dashed">
-          <div class="px-6 py-5">
-            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight text-black/40">
-              Third Internship
-            </h3>
-            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/40">
-              Company · Role · Dates
-            </p>
+        <article class="border-4 border-black">
+          <div class="flex items-center justify-between gap-4 bg-black px-6 py-5 text-white">
+            <div>
+              <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
+                In-Sync
+              </h3>
+              <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
+                Power BI Developer Intern · Gurgaon, India · May – Sep 2024
+              </p>
+            </div>
+            <img
+              src="/images/logos/insync-mark.png"
+              alt="In-Sync"
+              class="h-14 w-14 shrink-0 object-contain grayscale"
+            />
           </div>
           <div class="px-6 py-6">
-            <p class="font-body text-base leading-snug text-black/40">
-              Tell me the company, role, dates, and what you actually did
-              here and I'll drop it in.
+            <ul class="space-y-1.5 font-body text-base leading-snug">
+              <li class="flex gap-3"><span class="font-headline">—</span> Designed and built interactive Power BI dashboards using DAX and Power Query for data transformation, modeling, and business reporting.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Delivered reporting solutions for enterprise clients including Audi Kolkata, Ezeepay, Rupeeboss, and Quess Corp.</li>
+            </ul>
+            <p class="mt-4 font-meta text-xs font-bold uppercase tracking-wide text-black">
+              Power BI · DAX · Power Query
             </p>
           </div>
         </article>
@@ -237,15 +275,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </section>
 
     <!-- GitHub activity -->
-    <section id="activity" class="border-t-4 border-black py-12">
-      <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">GitHub Activity</p>
-      <h2 class="mt-2 font-headline text-4xl uppercase leading-[0.95] tracking-tight sm:text-6xl">
-        Contribution Graph
-      </h2>
-      <div class="mt-8">
-        <GithubGraph />
-      </div>
-    </section>
 
     <!-- Blog preview -->
     <section id="blog" class="border-t-4 border-black py-12">
@@ -254,49 +283,30 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         From the Blog
       </h2>
       <div class="mt-8 divide-y-2 divide-black">
-        {posts.map((post) => (
-          <article class="flex gap-6 py-6 first:pt-0">
+        {posts.map((post, i) => <BlogPostRow {...post} isFirst={i === 0} />)}
+        <article class="flex flex-col gap-4 py-6 sm:flex-row sm:items-start sm:gap-6">
+          <div class="flex items-start justify-between gap-4 sm:contents">
             <div class="w-28 shrink-0 sm:w-36">
-              {post.image ? (
-                <img
-                  src={post.image}
-                  alt=""
-                  class="aspect-square w-full border-2 border-black object-cover"
-                />
-              ) : (
-                <div class="flex aspect-square w-full items-center justify-center border-2 border-black bg-black/5">
-                  <p class="px-2 text-center font-meta text-[0.6rem] font-bold uppercase tracking-wide text-black/40">
-                    Image
-                  </p>
-                </div>
-              )}
+              <div class="flex aspect-square w-full items-center justify-center border-2 border-black border-dashed bg-black/5">
+                <p class="px-2 text-center font-meta text-[0.6rem] font-bold uppercase tracking-wide text-black/40">
+                  Image
+                </p>
+              </div>
             </div>
-            <div class="flex-1">
-              <h3 class="font-headline text-2xl uppercase leading-tight tracking-tight sm:text-3xl">
-                {post.title}
-              </h3>
-              <p class="mt-2 font-body text-lg leading-snug">
-                {post.teaser}
-              </p>
-              <a
-                href={`/blog/${post.slug}`}
-                class="mt-3 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide"
-              >
-                Read More &rarr;
-              </a>
-            </div>
-            <p class="shrink-0 text-right font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/60">
-              {post.formattedDate}
+            <p class="shrink-0 text-right font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/40 sm:order-3">
+              Coming Soon
             </p>
-          </article>
-        ))}
+          </div>
+          <div class="flex-1">
+            <h3 class="font-headline text-2xl uppercase leading-tight tracking-tight text-black/40 sm:text-3xl">
+              Next Post
+            </h3>
+            <p class="mt-2 font-body text-lg leading-snug text-black/40">
+              Tell me what you want written up next and I'll draft it.
+            </p>
+          </div>
+        </article>
       </div>
-      <a
-        href="/blog"
-        class="mt-8 inline-block border-2 border-black px-5 py-2.5 font-meta text-sm font-bold uppercase tracking-wide hover:bg-black hover:text-white"
-      >
-        View All Posts &rarr;
-      </a>
     </section>
   </div>
 

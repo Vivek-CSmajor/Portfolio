@@ -1,14 +1,10 @@
 ---
 import "../styles/global.css";
-
-interface Props {
-  title: string;
-  description?: string;
-}
-
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+interface Props { title: string; description?: string; }
 const { title, description = "Portfolio and blog." } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,14 +12,15 @@ const { title, description = "Portfolio and blog." } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amarante&family=Anton&family=Athiti:wght@400;600;700&family=Inter:wght@400;600;700&family=Kurale&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Anton&family=Athiti:wght@400;600;700&family=Inter:wght@400;600;700&family=Kurale&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-paper text-ink font-body antialiased">
-    <slot />
+  <body id="top" class="bg-paper text-ink font-body antialiased">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1"><slot /></main>
+    <Footer />
   </body>
 </html>

@@ -1,5 +1,4 @@
-// Identity-dependent values live here. Swap the placeholders below for the
-// real values (see SETUP.md) — no other file should need to change.
+// Identity and contact destinations are centralized here. See SETUP.md.
 const GITHUB_USERNAME = "Vivek-CSmajor";
 const LINKEDIN_USERNAME = "vivek-pandey-946297331";
 

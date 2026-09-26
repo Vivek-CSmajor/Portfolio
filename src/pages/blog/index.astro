@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout
+  title="Blog — Vivek Pandey"
+  description="Technical notes on Go, backend systems, telephony, and whatever else broke this week."
+>
+  <div class="mx-auto max-w-3xl px-6 py-8 sm:px-10">
+    <a
+      href="/"
+      class="font-meta text-sm font-bold uppercase tracking-[0.15em] hover:underline underline-offset-4"
+    >
+      &larr; Back to Home
+    </a>
+
+    <header class="mt-8 border-b-4 border-black pb-6">
+      <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">Vivek Pandey</p>
+      <h1 class="mt-2 font-headline text-5xl uppercase leading-[0.95] tracking-tight sm:text-7xl">
+        The Blog
+      </h1>
+    </header>
+
+    <div class="divide-y-2 divide-black">
+      {posts.map((post, i) => (
+        <article class="flex gap-6 py-8 first:pt-8">
+          <span class="font-display text-4xl leading-none text-black/30">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <p class="font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/60">
+              {post.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <h2 class="mt-1 font-headline text-2xl uppercase leading-tight tracking-tight sm:text-3xl">
+              <a href={`/blog/${post.id}`} class="hover:underline underline-offset-4">
+                {post.data.title}
+              </a>
+            </h2>
+            <p class="mt-2 font-body text-lg leading-snug">{post.data.teaser}</p>
+            <a
+              href={`/blog/${post.id}`}
+              class="mt-3 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide"
+            >
+              Read More &rarr;
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -1,16 +1,19 @@
-# Setup
+# Portfolio setup
 
-Identity-dependent values are centralized in `src/config/site.config.ts`.
-Nothing else in the codebase should need to change once these are filled in.
+This Astro site keeps the original newspaper design: paper texture, black rules, and the original display fonts. The homepage's hero, skills, and contact sections are in `src/pages/index.astro`; their small layout additions are in `src/styles/global.css`.
 
-| Placeholder            | Where it's used                          | Replace with |
-|-------------------------|-------------------------------------------|--------------|
-| `YOUR_GITHUB_USERNAME`  | GitHub contribution graph, GitHub link    | Your GitHub username |
-| `YOUR_LINKEDIN_USERNAME`| LinkedIn link in Contact section          | Your LinkedIn profile username |
+Run `npm ci`, then `npm run dev` for local development. Run `npm run build` to generate the static site in `dist/`.
 
-Also check:
-- `resumeUrl` in `site.config.ts` points to `/resume.pdf` — drop an actual
-  resume PDF into `public/resume.pdf` (the file doesn't exist yet, so the
-  link is currently dead).
-- `email` in `site.config.ts` is already real (vivek.csmajor@gmail.com) —
-  update it there if it ever changes.
+## Personal links
+
+Edit `src/config/site.config.ts` to change the GitHub username, LinkedIn profile, email, or résumé URL. The current profile values are configured there.
+
+The résumé URL is `/resume.pdf`, but that file has not been supplied. Add the actual résumé as `public/resume.pdf`, then rebuild. The site will change from “Request résumé” (email) to the document link automatically. A full HTTPS résumé URL also works.
+
+The featured project's repository URL is not known. Its link currently opens the existing architecture article, so it does not lead to a dead end.
+
+## Content and logos
+
+Blog posts are in `src/content/blog/`. Branded technology marks are local assets in `public/icons/`, shown beside readable text labels. The live GitHub contribution chart is loaded by `src/components/GithubGraph.astro`.
+
+For a restricted Windows shell where Astro telemetry cannot create its config directory, set `$env:ASTRO_TELEMETRY_DISABLED='1'` before using the npm commands.

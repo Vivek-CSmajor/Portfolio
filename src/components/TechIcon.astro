@@ -1,32 +1,8 @@
 ---
-import fs from "node:fs";
+import { existsSync } from "node:fs";
 import path from "node:path";
-
-interface Props {
-  slug: string;
-  class?: string;
-}
-
+interface Props { slug: string; class?: string; }
 const { slug, class: className = "" } = Astro.props;
-
-const isPng = fs.existsSync(path.join(process.cwd(), "public/icons", `${slug}.png`));
-
-const raw = isPng
-  ? null
-  : fs.readFileSync(path.join(process.cwd(), "public/icons", `${slug}.svg`), "utf-8");
-const viewBox = raw?.match(/viewBox="([^"]+)"/)?.[1] ?? "0 0 24 24";
-const d = raw?.match(/<path d="([^"]+)"/)?.[1] ?? "";
+const extension = existsSync(path.join(process.cwd(), "public/icons", `${slug}.svg`)) ? "svg" : "png";
 ---
-
-{isPng ? (
-  <img
-    src={`/icons/${slug}.png`}
-    alt=""
-    aria-hidden="true"
-    class={`h-4 w-4 shrink-0 object-contain ${className}`}
-  />
-) : (
-  <svg viewBox={viewBox} class={`h-4 w-4 shrink-0 fill-current ${className}`} aria-hidden="true" focusable="false">
-    <path d={d}></path>
-  </svg>
-)}
+<img src={`/icons/${slug}.${extension}`} width="32" height="32" alt="" aria-hidden="true" loading="lazy" class={`skill-logo ${className}`} />

@@ -1,0 +1,43 @@
+---
+import Icon from "./Icon.astro";
+const home = Astro.url.pathname === "/";
+const anchor = (id: string) => home ? `#${id}` : `/#${id}`;
+---
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="/" aria-label="Vivek Pandey, home"><strong>VP<span>.</span></strong><span>VIVEK PANDEY<small>BACKEND DEVELOPER</small></span></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href={anchor("work")}>Experience</a>
+      <a href={anchor("projects")}>Projects</a>
+      <a href={anchor("skills")}>Stack</a>
+      <a href="/blog" aria-current={Astro.url.pathname.startsWith("/blog") ? "page" : undefined}>Writing</a>
+    </nav>
+    <a class="site-contact-link" href="#contact">LET'S TALK <Icon name="arrow" /></a>
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation"><span class="menu-lines" aria-hidden="true"></span></summary>
+      <nav aria-label="Mobile navigation">
+        <a href={anchor("work")}>Experience</a>
+        <a href={anchor("projects")}>Projects</a>
+        <a href={anchor("skills")}>Stack</a>
+        <a href="/blog">Writing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>(".mobile-nav");
+  if (menu) {
+    const close = () => { menu.open = false; };
+    menu.querySelectorAll("a").forEach(link => link.addEventListener("click", close));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && menu.open) {
+        close();
+        menu.querySelector("summary")?.focus();
+      }
+    });
+    document.addEventListener("click", event => {
+      if (event.target instanceof Node && !menu.contains(event.target)) close();
+    });
+  }
+</script>

@@ -1,34 +1,14 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import GithubGraph from "../components/GithubGraph.astro";
-import { siteConfig } from "../config/site.config";
+import TechIcon from "../components/TechIcon.astro";
+import Icon from "../components/Icon.astro";
 
 const skills = [
-  { label: "Languages", items: ["Go", "C++"] },
-  { label: "Frameworks", items: ["Gin", "Django", "FastAPI"] },
-  { label: "Cloud / Infra", items: ["AWS", "CI/CD (GitHub Actions)", "Git"] },
-  { label: "Domain", items: ["VoIP/SIP", "REST APIs", "Competitive Programming"] },
-  { label: "Data / BI", items: ["Power BI", "DAX", "Power Query"] },
-];
-
-// Inline monochrome icon SVGs (stroke="currentColor") so they recolor with
-// the surrounding text — sized up to fill their block via width/height="100%".
-function readIcon(name: string) {
-  const raw = fs.readFileSync(path.join(process.cwd(), "public/icons", `${name}.svg`), "utf-8");
-  return raw
-    .replace(/<!--.*?-->/s, "")
-    .replace('width="24"', 'width="100%"')
-    .replace('height="24"', 'height="100%"');
-}
-
-const contactLinks = [
-  { label: "Email", href: `mailto:${siteConfig.email}`, iconSrc: "/icons/email.png" },
-  { label: "LinkedIn", href: siteConfig.linkedinUrl, iconSrc: "/icons/linkedin.png" },
-  { label: "GitHub", href: siteConfig.githubUrl, iconSrc: "/icons/github-octocat.png" },
-  { label: "Résumé", href: siteConfig.resumeUrl, iconSvg: readIcon("resume") },
+  { label: "Languages", items: [{ name: "Go", icon: "go" }, { name: "C++", icon: "cplusplus" }] },
+  { label: "Frameworks", items: [{ name: "Gin", icon: "gin" }, { name: "Django", icon: "django" }, { name: "FastAPI", icon: "fastapi" }] },
+  { label: "Cloud / Infra", items: [{ name: "AWS", icon: "aws" }, { name: "GitHub Actions", icon: "githubactions" }, { name: "Git", icon: "git" }] },
 ];
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
@@ -51,41 +31,21 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   description="Backend developer working in Go and AWS on telephony, IoT, and voice AI systems."
 >
   <div class="mx-auto max-w-6xl px-6 py-8 sm:px-10">
-    <!-- Masthead -->
-    <header class="flex flex-col items-center pt-4 pb-0 text-center">
-      <h1 class="font-display text-6xl uppercase leading-[0.9] tracking-tight sm:text-8xl md:text-9xl">
-        Vivek Pandey
-      </h1>
-    </header>
-
-    <!-- Subhead banner -->
-    <p class="mt-6 bg-black px-4 py-4 text-center font-headline text-lg uppercase tracking-wide text-white sm:text-2xl">
-      Backend Developer — Go, AWS, and the Systems Underneath Telephony/VoIP
-    </p>
-
-    <!-- Lede -->
-    <section class="border-t-4 border-black py-12">
-      <div class="flex flex-col gap-8 sm:flex-row sm:items-start">
-        <div class="mx-auto aspect-square w-40 shrink-0 border-4 border-black bg-black/5 sm:mx-0 sm:w-48">
-          <div class="flex h-full w-full items-center justify-center px-4 text-center font-meta text-xs font-bold uppercase tracking-wide text-black/50">
-            Mugshot — drop your photo here
-          </div>
+    <!-- Masthead: the work leads, the name remains visible without dominating. -->
+    <header class="portfolio-hero">
+      <div class="hero-index font-meta">PORTFOLIO / 2026 <span>01 — BACKEND ENGINEERING</span></div>
+      <p class="hero-byline font-display">Vivek Pandey</p>
+      <h1 class="font-headline">THE SYSTEMS<br /><span>BEHIND THE EXPERIENCE.</span></h1>
+      <div class="hero-banner font-meta"><span>BACKEND DEVELOPER</span><span>GO / AWS / TELEPHONY</span><span>BASED IN CODE. FOCUSED ON IMPACT.</span></div>
+      <div class="hero-lede">
+        <div>
+          <p class="font-body">I build the infrastructure people rely on without seeing it — from messaging systems to AI voice tooling. Currently a backend engineering intern at <strong>Vobiz.ai</strong>, working in Go on an AI-first telephony platform.</p>
+          <div class="hero-actions font-meta"><a href="#projects" class="hero-primary">VIEW MY WORK <Icon name="arrow" /></a><a href="#contact" class="hero-secondary">GET IN TOUCH <Icon name="arrow" /></a></div>
         </div>
-
-        <p class="font-body text-2xl leading-snug">
-          Currently a backend engineering intern at
-          <span class="font-bold">Vobiz.ai</span>, working on core messaging
-          infrastructure (SMS/RCS) and AI voice agent tooling for an AI-first
-          telephony platform. CS undergrad at Amity University, Lucknow.
-          <span class="font-bold">Language-agnostic by design</span> — Go is
-          home base, but the interesting part is the systems, not the syntax.
-        </p>
+        <aside class="hero-note"><span class="font-meta">A NOTE FROM THE DESK / 001</span><p class="font-accent">“The interesting part is the systems, not the syntax.”</p><span class="font-meta">GO IS HOME BASE. CURIOSITY DOES THE REST.</span></aside>
       </div>
-
-      <p class="mt-8 inline-flex flex-wrap items-center gap-3 border-2 border-black px-4 py-2 font-meta text-sm font-bold tracking-[0.1em] uppercase">
-        Bachelor's in Technology - Computer Science & Engineering · CGPA 8.3 · 2024–2028
-      </p>
-    </section>
+      <p class="education-line font-meta">B.TECH / COMPUTER SCIENCE & ENGINEERING <span>AMITY UNIVERSITY, LUCKNOW</span><span>2024–2028 · CGPA 8.3</span></p>
+    </header>
 
     <!-- Featured work -->
     <section id="work" class="border-t-4 border-black py-12">
@@ -94,7 +54,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         Internships
       </h2>
 
-      <div class="mt-10 grid grid-cols-1 items-start gap-8 lg:grid-cols-3">
+      <div class="mt-10 grid grid-cols-1 items-start gap-8 md:grid-cols-2">
         <article class="border-4 border-black">
           <div class="bg-black px-6 py-5 text-white">
             <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
@@ -140,22 +100,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
           </div>
         </article>
 
-        <article class="border-4 border-black border-dashed">
-          <div class="px-6 py-5">
-            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight text-black/40">
-              Third Internship
-            </h3>
-            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/40">
-              Company · Role · Dates
-            </p>
-          </div>
-          <div class="px-6 py-6">
-            <p class="font-body text-base leading-snug text-black/40">
-              Tell me the company, role, dates, and what you actually did
-              here and I'll drop it in.
-            </p>
-          </div>
-        </article>
       </div>
     </section>
 
@@ -166,8 +110,8 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         Projects
       </h2>
 
-      <div class="mt-8 grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
-        <article class="border-2 border-black px-7 py-6">
+      <div class="mt-8">
+        <article class="project-feature border-2 border-black px-7 py-6">
           <p class="font-meta text-xs font-bold tracking-[0.2em] uppercase text-black/60">
             Personal Project — In Progress
           </p>
@@ -186,41 +130,31 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
               <li class="flex gap-3"><span class="font-headline">—</span> Lockdown-mode client — fullscreen and focus-switch enforcement</li>
             </ul>
           </div>
-          <a href="#" class="mt-4 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide">
-            View on GitHub &rarr;
+          <a href="/blog/offline-judging-engine" class="mt-4 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide">
+            Explore the architecture &rarr;
           </a>
-        </article>
-
-        <article class="border-2 border-black border-dashed px-7 py-6">
-          <p class="font-meta text-xs font-bold tracking-[0.2em] uppercase text-black/40">
-            Second Project
-          </p>
-          <h3 class="mt-1 font-headline text-2xl uppercase leading-tight tracking-tight text-black/40">
-            Project Name
-          </h3>
-          <p class="mt-4 font-body text-base leading-snug text-black/40">
-            Tell me what this one is, what you built, and the stack, and
-            I'll drop it in.
-          </p>
         </article>
       </div>
     </section>
 
     <!-- Skills -->
     <section id="skills" class="border-t-4 border-black py-12">
-      <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">Skills</p>
-      <div class="mt-8 columns-1 gap-10 border-t-2 border-black pt-8 sm:columns-2 lg:columns-3">
+      <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">The Toolkit</p>
+      <h2 class="mt-2 font-headline text-4xl uppercase leading-none sm:text-6xl">Tech Stack</h2>
+      <p class="mt-4 max-w-2xl font-body text-lg">The tools I use to build APIs, cloud services, and the systems connecting them.</p>
+      <div class="skills-grid mt-8 grid grid-cols-1 gap-8 border-t-2 border-black pt-8 md:grid-cols-3">
         {skills.map((group) => (
-          <div class="mb-8 break-inside-avoid border-l-4 border-black pl-4">
-            <p class="inline-block bg-black px-2 py-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white">
+          <div class="skill-group">
+            <h3 class="inline-block bg-black px-2 py-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white">
               {group.label}
-            </p>
-            <p class="mt-2 font-body text-lg leading-snug">
-              {group.items.join(" · ")}
-            </p>
+            </h3>
+            <ul class="skill-items mt-4">
+              {group.items.map((skill) => <li><TechIcon slug={skill.icon} class="skill-logo" /><span>{skill.name}</span></li>)}
+            </ul>
           </div>
         ))}
       </div>
+      <p class="skills-extras font-body"><strong>Also in the mix:</strong> VoIP/SIP · REST APIs · Competitive Programming <span> / </span> Power BI · DAX · Power Query</p>
     </section>
 
     <!-- GitHub activity -->
@@ -238,16 +172,14 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     <section id="blog" class="border-t-4 border-black py-12">
       <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">From the Blog</p>
       <div class="mt-6 divide-y-2 divide-black">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <article class="flex gap-6 py-6 first:pt-0">
             <div class="w-28 shrink-0 sm:w-36">
               <p class="font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/60">
                 {post.formattedDate}
               </p>
-              <div class="mt-2 flex aspect-square w-full items-center justify-center border-2 border-black bg-black/5">
-                <p class="px-2 text-center font-meta text-[0.6rem] font-bold uppercase tracking-wide text-black/40">
-                  Image
-                </p>
+              <div class="blog-number mt-2 flex aspect-square w-full items-center justify-center border-2 border-black">
+                <span class="font-headline text-5xl" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               </div>
             </div>
             <div>
@@ -275,40 +207,5 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       </a>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="border-t-4 border-black py-12">
-      <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
-        <div class="lg:col-span-5">
-          <p class="font-meta text-sm font-bold tracking-[0.2em] uppercase">Get in Touch</p>
-          <h2 class="mt-3 font-headline text-3xl uppercase leading-[0.95] tracking-tight sm:text-5xl">
-            Let's talk backend systems, telephony, or otherwise.
-          </h2>
-        </div>
-
-        <div class="lg:col-span-7">
-          <div class="relative border-t-2 border-black">
-            <span class="absolute -top-[5px] -left-[5px] h-[9px] w-[9px] bg-black"></span>
-            <div class="grid grid-cols-2 gap-4 pt-6 sm:grid-cols-4">
-              {contactLinks.map((link) => (
-                <div class="flex flex-col items-center">
-                  <span class="h-6 w-0.5 bg-black"></span>
-                  <a href={link.href} class="group block w-full border-2 border-black">
-                    <div class="flex h-14 items-center justify-center border-b-2 border-black bg-black text-white">
-                      {link.iconSvg && <div class="h-5 w-5" set:html={link.iconSvg} />}
-                      {link.iconSrc && (
-                        <img src={link.iconSrc} alt="" class="h-5 w-5 object-contain invert" />
-                      )}
-                    </div>
-                    <p class="px-2 py-2.5 text-center font-meta text-sm font-bold uppercase tracking-wide group-hover:bg-black group-hover:text-white">
-                      {link.label}
-                    </p>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </Layout>

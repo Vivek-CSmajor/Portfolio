@@ -1,0 +1,55 @@
+---
+import { existsSync } from "node:fs";
+import path from "node:path";
+import Icon from "./Icon.astro";
+import { siteConfig } from "../config/site.config";
+
+const resumeAvailable = /^https:\/\//.test(siteConfig.resumeUrl) ||
+  existsSync(path.join(process.cwd(), "public", siteConfig.resumeUrl.replace(/^\/+/, "")));
+const resumeHref = resumeAvailable ? siteConfig.resumeUrl : `mailto:${siteConfig.email}?subject=Resume%20request`;
+const contactLinks = [
+  { label: "Email", href: `mailto:${siteConfig.email}`, icon: "mail" },
+  { label: "LinkedIn", href: siteConfig.linkedinUrl, icon: "linkedin" },
+  { label: "GitHub", href: siteConfig.githubUrl, icon: "github" },
+  { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file" },
+];
+---
+<footer class="site-footer">
+  <section id="contact" class="footer-contact" aria-labelledby="footer-contact-heading">
+    <div class="footer-contact-intro">
+      <p class="footer-label">GET IN TOUCH / 005</p>
+      <h2 id="footer-contact-heading" class="font-headline">LET'S BUILD<br />SOMETHING THAT WORKS.</h2>
+      <p class="footer-contact-description">An idea, a problem, or a hello — my inbox is open.</p>
+    </div>
+    <div class="footer-contact-details">
+      <p class="footer-label">WRITE TO ME</p>
+      <div class="footer-email-row">
+        <a class="footer-email font-headline" href={`mailto:${siteConfig.email}`}>{siteConfig.email} <Icon name="arrow" /></a>
+      </div>
+      <button type="button" class="footer-copy-email" data-email={siteConfig.email} aria-label="Copy email address" hidden><span>COPY ADDRESS</span><Icon name="copy" /></button>
+      <p class="footer-copy-status" role="status" aria-live="polite"></p>
+      <div class="footer-contact-links">
+        {contactLinks.map(link => <a href={link.href}><Icon name={link.icon} /><span>{link.label}</span><Icon name="arrow" /></a>)}
+      </div>
+    </div>
+  </section>
+  <div class="footer-bottom">
+    <p>© {new Date().getFullYear()} Vivek Pandey</p>
+    <a class="footer-back-top" href="#top">BACK TO TOP <Icon name="up" /></a>
+  </div>
+</footer>
+<script>
+  const copyButton = document.querySelector<HTMLButtonElement>(".footer-copy-email");
+  const copyStatus = document.querySelector<HTMLElement>(".footer-copy-status");
+  if (copyButton && copyStatus && navigator.clipboard?.writeText) {
+    copyButton.hidden = false;
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(copyButton.dataset.email ?? "");
+        copyStatus.textContent = "Email address copied.";
+      } catch {
+        copyStatus.textContent = "Select the address above to copy it, or click it to write an email.";
+      }
+    });
+  }
+</script>

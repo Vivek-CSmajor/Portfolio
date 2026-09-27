@@ -123,8 +123,8 @@ body {
   max-width: 1152px;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(32px, 5vw, 88px);
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 32px);
 }
 
 .footer-label {

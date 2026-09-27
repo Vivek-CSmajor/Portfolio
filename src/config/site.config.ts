@@ -2,7 +2,7 @@
 // real values (see SETUP.md) — no other file should need to change.
 const GITHUB_USERNAME = "Vivek-CSmajor";
 const LINKEDIN_USERNAME = "vivek-pandey-946297331";
-const LEETCODE_USERNAME = "vivek-CSmajor";
+const LEETCODE_USERNAME = "vivek_CSmajor";
 const INSTAGRAM_USERNAME = "vivekkk_199";
 
 export const siteConfig = {

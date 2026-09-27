@@ -60,15 +60,15 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
     <!-- Subhead banner -->
     <p class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-black px-4 py-4 text-center font-headline text-sm uppercase tracking-wide text-white sm:text-xl">
-      <a href={siteConfig.githubUrl} class="hover:underline underline-offset-4">GitHub</a>
+      <a href={siteConfig.githubUrl} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="github" class="h-4 w-4 sm:h-5 sm:w-5" />GitHub</a>
       <span aria-hidden="true">·</span>
-      <a href={siteConfig.leetcodeUrl} class="hover:underline underline-offset-4">LeetCode</a>
+      <a href={siteConfig.leetcodeUrl} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="leetcode" class="h-4 w-4 sm:h-5 sm:w-5" />LeetCode</a>
       <span aria-hidden="true">·</span>
-      <a href="/#blog" class="hover:underline underline-offset-4">Blogs</a>
+      <a href="/#blog" class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="pencil" class="h-4 w-4 sm:h-5 sm:w-5" />Blogs</a>
       <span aria-hidden="true">·</span>
-      <a href={siteConfig.linkedinUrl} class="hover:underline underline-offset-4">LinkedIn</a>
+      <a href={siteConfig.linkedinUrl} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="linkedin" class="h-4 w-4 sm:h-5 sm:w-5" />LinkedIn</a>
       <span aria-hidden="true">·</span>
-      <a href="#contact" class="hover:underline underline-offset-4">Contacts</a>
+      <a href="#contact" class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="contact" class="h-4 w-4 sm:h-5 sm:w-5" />Contacts</a>
     </p>
 
     <!-- Lede + Tech Stack, side by side -->
@@ -264,19 +264,26 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
           </div>
         </article>
 
-        <article class="border-4 border-black border-dashed">
-          <div class="px-6 py-5">
-            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight text-black/40">
-              Project Name
+        <article class="border-4 border-black">
+          <div class="bg-black px-6 py-5 text-white">
+            <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
+              Relational Database From Scratch
             </h3>
-            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-black/40">
-              Second Project
+            <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
+              Personal Project · Planned · Not Started
             </p>
           </div>
           <div class="px-6 py-6">
-            <p class="font-body text-base leading-snug text-black/40">
-              Tell me what this one is, what you built, and the stack, and
-              I'll drop it in.
+            <p class="font-body text-base leading-snug">
+              Planning a relational database built from scratch in Go —
+              B-tree storage engine, WAL, and MVCC, with QUIC and SQL parsing
+              as the only borrowed pieces. Building it to actually understand
+              the distributed-systems internals behind the infra everyone
+              leans on right now — etcd, eBPF, Cilium, CockroachDB — instead
+              of just using it.
+            </p>
+            <p class="mt-4 font-meta text-xs font-bold uppercase tracking-wide text-black">
+              Go · B-Tree · WAL · MVCC · QUIC · SQL
             </p>
           </div>
         </article>

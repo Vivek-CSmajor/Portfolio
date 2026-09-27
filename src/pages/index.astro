@@ -24,7 +24,7 @@ const resumeAvailable =
   existsSync(path.join(process.cwd(), "public", siteConfig.resumeUrl.replace(/^\/+/, "")));
 const resumeHref = resumeAvailable ? siteConfig.resumeUrl : `mailto:${siteConfig.email}?subject=Resume%20request`;
 const contactLinks = [
-  { label: "Email", href: `mailto:${siteConfig.email}`, icon: "mail" },
+  { label: "Instagram", href: siteConfig.instagramUrl, icon: "instagram" },
   { label: "LinkedIn", href: siteConfig.linkedinUrl, icon: "linkedin" },
   { label: "GitHub", href: siteConfig.githubUrl, icon: "github" },
   { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file" },
@@ -58,8 +58,16 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </header>
 
     <!-- Subhead banner -->
-    <p class="mt-6 bg-black px-4 py-4 text-center font-headline text-lg uppercase tracking-wide text-white sm:text-2xl">
-      Backend Developer — Go, AWS, and the Systems Underneath Telephony/VoIP
+    <p class="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-black px-4 py-4 text-center font-headline text-sm uppercase tracking-wide text-white sm:text-xl">
+      <a href={siteConfig.githubUrl} class="hover:underline underline-offset-4">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a href={siteConfig.leetcodeUrl} class="hover:underline underline-offset-4">LeetCode</a>
+      <span aria-hidden="true">·</span>
+      <a href="/#blog" class="hover:underline underline-offset-4">Blogs</a>
+      <span aria-hidden="true">·</span>
+      <a href={siteConfig.linkedinUrl} class="hover:underline underline-offset-4">LinkedIn</a>
+      <span aria-hidden="true">·</span>
+      <a href="#contact" class="hover:underline underline-offset-4">Contacts</a>
     </p>
 
     <!-- Lede + Tech Stack, side by side -->
@@ -84,7 +92,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
               systems and OSS, and I prefer to write
               minimal code that works, stays clean, and is actually mine
               — not AI-generated, unless it's frontend design, in which case,
-              Claude's the man.
+              I am the ultimate vibecoder.
             </p>
           </div>
 
@@ -325,6 +333,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         </div>
         <button type="button" class="footer-copy-email" data-email={siteConfig.email} aria-label="Copy email address" hidden><span>COPY ADDRESS</span><Icon name="copy" /></button>
         <p class="footer-copy-status" role="status" aria-live="polite"></p>
+        <p class="footer-phone font-headline">{siteConfig.phone}</p>
         <div class="footer-contact-links">
           {contactLinks.map((link) => (
             <a href={link.href}><Icon name={link.icon} /><span>{link.label}</span><Icon name="arrow" /></a>

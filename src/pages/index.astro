@@ -28,7 +28,7 @@ const contactLinks = [
   { label: "Instagram", href: siteConfig.instagramUrl, icon: "instagram" },
   { label: "LinkedIn", href: siteConfig.linkedinUrl, icon: "linkedin" },
   { label: "GitHub", href: siteConfig.githubUrl, icon: "github" },
-  { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file" },
+  { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file", download: resumeAvailable ? "Vivek Pandey - Resume.pdf" : undefined },
 ];
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
@@ -348,7 +348,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         <p class="footer-phone font-headline">{siteConfig.phone}</p>
         <div class="footer-contact-links">
           {contactLinks.map((link) => (
-            <a href={link.href}><Icon name={link.icon} /><span>{link.label}</span><Icon name="arrow" /></a>
+            <a href={link.href} download={link.download}><Icon name={link.icon} /><span>{link.label}</span><Icon name="arrow" /></a>
           ))}
         </div>
       </div>

@@ -39,6 +39,12 @@ body {
   @apply w-full border-4 border-black grayscale;
 }
 
+/* GIFs lose the whole point of being a reaction/meme GIF in grayscale —
+   keep them in color while screenshots/logos stay monochrome. */
+.post-content figure img[src$=".gif"] {
+  @apply grayscale-0;
+}
+
 .post-content figure figcaption {
   @apply mt-2 font-meta text-xs font-bold uppercase tracking-wide text-black/50;
 }

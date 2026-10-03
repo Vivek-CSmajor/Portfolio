@@ -28,7 +28,7 @@ const contactLinks = [
   { label: "Instagram", href: siteConfig.instagramUrl, icon: "instagram" },
   { label: "LinkedIn", href: siteConfig.linkedinUrl, icon: "linkedin" },
   { label: "GitHub", href: siteConfig.githubUrl, icon: "github" },
-  { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file", download: resumeAvailable ? "Vivek Pandey - Resume.pdf" : undefined },
+  { label: resumeAvailable ? "Résumé" : "Request résumé", href: resumeHref, icon: "file", download: resumeAvailable ? "VivekPandey_resume.pdf" : undefined },
 ];
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
@@ -68,7 +68,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       <span aria-hidden="true">·</span>
       <a href={siteConfig.linkedinUrl} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="linkedin" class="h-4 w-4 sm:h-5 sm:w-5" />LinkedIn</a>
       <span aria-hidden="true">·</span>
-      <a href={resumeHref} download={resumeAvailable ? "Vivek Pandey - Resume.pdf" : undefined} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="file" class="h-4 w-4 sm:h-5 sm:w-5" />Resume</a>
+      <a href={resumeHref} download={resumeAvailable ? "VivekPandey_resume.pdf" : undefined} class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="file" class="h-4 w-4 sm:h-5 sm:w-5" />Resume</a>
       <span aria-hidden="true">·</span>
       <a href="#contact" class="inline-flex items-center gap-1.5 hover:underline underline-offset-4"><Icon name="contact" class="h-4 w-4 sm:h-5 sm:w-5" />Contacts</a>
     </p>

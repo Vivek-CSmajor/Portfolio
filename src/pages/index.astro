@@ -243,26 +243,23 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
         <article class="border-4 border-black">
           <div class="bg-black px-6 py-5 text-white">
             <h3 class="font-headline text-xl uppercase leading-tight tracking-tight">
-              Offline Secure Coding Assessment Platform
+              LAN-Based ICPC Platform
+              (<a href="https://github.com/Vivek-CSmajor/CampusCode-Server" class="underline underline-offset-2 hover:text-white/70">Server</a>
+              | <a href="https://github.com/Vivek-CSmajor/CampusCode-Client" class="underline underline-offset-2 hover:text-white/70">Client</a>
+              | <a href="https://github.com/Vivek-CSmajor/CampusCode-Cloud" class="underline underline-offset-2 hover:text-white/70">Cloud</a>)
             </h3>
             <p class="mt-1 font-meta text-xs font-bold uppercase tracking-[0.15em] text-white/70">
               Personal Project · In Progress
             </p>
           </div>
           <div class="px-6 py-6">
-            <p class="font-body text-xl leading-snug">
-              A hybrid cloud + LAN exam platform for universities to run
-              placement rounds and lab exams fully offline — a cloud control
-              plane paired with a local judging engine.
-            </p>
-            <ul class="mt-4 space-y-1.5 font-body text-xl leading-snug">
-              <li class="flex gap-3"><span class="font-headline">—</span> Sandboxed execution with ICPC-style scoring</li>
-              <li class="flex gap-3"><span class="font-headline">—</span> Local judging engine, no internet dependency mid-exam</li>
-              <li class="flex gap-3"><span class="font-headline">—</span> Lockdown-mode client — fullscreen and focus-switch enforcement</li>
+            <ul class="space-y-1.5 font-body text-xl leading-snug">
+              <li class="flex gap-3"><span class="font-headline">—</span> Built from scratch using Golang, a system spanning three applications that enables ICPC/CP contest organizers to conduct contests securely without internet access, with monitoring and control.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Engineered a cross-platform, sandboxed judge engine from scratch using Golang to run submissions in multiple languages, with ICPC-style scoring and ranking and time/memory limits, fully offline.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Created an admin dashboard for organizers to register teams, manage contests, and monitor participating teams.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Created a cross-platform participant app with kiosk mode, fullscreen enforcement, and anti-cheating mechanisms, along with monitoring tools for admins.</li>
+              <li class="flex gap-3"><span class="font-headline">—</span> Created a hosted website where teams can download the contest app and organizers can create contests with custom problem statements and test cases.</li>
             </ul>
-            <a href="https://github.com/Vivek-CSmajor/CampusCode-Server" class="mt-4 inline-block border-b-2 border-black font-meta text-sm font-bold uppercase tracking-wide">
-              View on GitHub &rarr;
-            </a>
           </div>
         </article>
 
